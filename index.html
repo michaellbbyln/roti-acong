@@ -2162,20 +2162,24 @@
     }
 
     // klik nav -> scroll halus + offset header sticky
-    navLinks.forEach(a => {
-      a.addEventListener("click", (e) => {
-        const target = document.querySelector(a.getAttribute("href"));
-        if (!target) return;
-        e.preventDefault();
+    // klik nav -> scroll halus + offset header sticky
+navLinks.forEach(a => {
+  a.addEventListener("click", (e) => {
+    const target = document.querySelector(a.getAttribute("href"));
+    if (!target) return;
+    e.preventDefault();
 
-        const y = target.getBoundingClientRect().top + window.scrollY - headerH() - 14;
-        window.scrollTo({ top: y, behavior: "smooth" });
-        history.pushState(null, "", a.getAttribute("href"));
+    // ✅ UNIVERSAL FIX: kalau section pakai reveal, paksa tampil saat lompat
+    if (target.classList.contains("reveal")) target.classList.add("show");
 
-        // langsung set aktif biar ga “keduluan” scrollspy
-        setActiveById(target.id);
-      });
-    });
+    const y = target.getBoundingClientRect().top + window.scrollY - headerH() - 14;
+    window.scrollTo({ top: y, behavior: "smooth" });
+    history.pushState(null, "", a.getAttribute("href"));
+
+    setActiveById(target.id);
+  });
+});
+
 
     // scrollspy berbasis posisi (lebih stabil daripada intersectionRatio)
     let ticking = false;
@@ -2240,4 +2244,5 @@
 
   </body>
   </html>
+
 
