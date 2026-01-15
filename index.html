@@ -2132,7 +2132,7 @@
             io.unobserve(e.target); // sekali muncul, ga perlu diobserve lagi
           }
         });
-      }, { threshold: 0.12 });
+      }, { threshold: 0.05 });
 
       els.forEach(el => io.observe(el));
     })();
@@ -2244,5 +2244,6 @@ navLinks.forEach(a => {
 
   </body>
   </html>
+
 
 
